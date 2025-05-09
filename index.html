@@ -1,1 +1,861 @@
-<vch></vch>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$GORKRRR</title>
+    <link rel="shortcut icon" href="images/GORKRRR.gif" type="image/x-icon">
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.min.css">
+  <style>
+    :root {
+      --primary: #ffffff;
+      --primary-dark: #cccccc;
+      --secondary: #000000;
+      --bg: #000000;
+      --card-bg: rgba(30, 30, 30, 0.9);
+      --text: #ffffff;
+      --text-light: #aaaaaa;
+      --neon-glow: 0 0 5px rgba(255, 255, 255, 0.5);
+      --neon-glow-secondary: 0 0 5px rgba(0, 0, 0, 0.5);
+      --border-radius: 12px;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: -2px -2px;
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: black;
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      z-index: 9999;
+      transform: translateX(200%);
+      transition: all 0.3s ease;
+      box-shadow: var(--neon-glow);
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification::before {
+      content: "✓";
+      font-size: 1.2rem;
+    }
+    
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.2rem;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .logo img {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .primary {
+      color: var(--primary);
+    }
+    
+    .secondary {
+      color: var(--secondary);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover:after {
+      width: 100%;
+    }
+    
+    .buy-button {
+      background: var(--primary);
+      color: black;
+      padding: 0.6rem 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    
+    .buy-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--neon-glow);
+    }
+    
+    /* Hero Section */
+    .hero {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    }
+    
+    .hero-image {
+      width: 180px;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 15px var(--primary));
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--primary), var(--text-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .tagline {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 400;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .btn {
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: black;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--neon-glow);
+    }
+    
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+    
+    /* About Section */
+    .section {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 3px;
+      bottom: -15px;
+      left: 20%;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      border-radius: 3px;
+    }
+    
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      width: 320px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: var(--neon-glow);
+    }
+    
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .card-text {
+      color: var(--text-light);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    
+    /* Icon Links Section */
+    .icon-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem auto;
+      flex-wrap: wrap;
+      max-width: 800px;
+    }
+    
+    .icon-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-light);
+      transition: all 0.3s ease;
+      width: 80px;
+      position: relative;
+    }
+    
+    .icon-link:hover {
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .icon-container {
+      width: 60px;
+      height: 60px;
+      background: var(--card-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .icon-link:hover .icon-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+      box-shadow: var(--neon-glow);
+    }
+    
+    /* Unique Animations for Each Icon */
+    .icon-link:nth-child(1) .icon-container {
+      animation: pulse-white 2s infinite;
+    }
+    
+    .icon-link:nth-child(2) .icon-container {
+      animation: rotate 4s linear infinite;
+    }
+    
+    .icon-link:nth-child(3) .icon-container {
+      animation: bounce 2s infinite;
+    }
+    
+    .icon-link:nth-child(4) .icon-container {
+      animation: shake 2s infinite;
+    }
+    
+    .icon-link:nth-child(5) .icon-container {
+      animation: pulse-black 2s infinite;
+    }
+    
+    @keyframes pulse-white {
+      0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+    
+    @keyframes pulse-black {
+      0% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+    
+    .icon-label {
+      font-size: 0.85rem;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Tokenomics Section */
+    .token-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .token-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--neon-glow);
+    }
+    
+    .token-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 1rem;
+    }
+    
+    .token-row:last-child {
+      border-bottom: none;
+    }
+    
+    .token-label {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    
+    .token-value {
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    /* Copy Section */
+    .copy-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      max-width: 700px;
+      margin: 4rem auto;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+    
+    .copy-section:hover {
+      border-color: var(--primary);
+      box-shadow: var(--neon-glow);
+    }
+    
+    .copy-text {
+      font-family: 'Courier New', monospace;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      display: block;
+      margin-top: 1rem;
+      color: var(--primary);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      word-break: break-all;
+    }
+    
+    .copy-section:hover .copy-text {
+      border-color: var(--primary);
+    }
+    
+    /* Footer */
+    .footer {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .social-link {
+      color: var(--text-light);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .social-link:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      color: var(--text-light);
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .footer-tagline {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        margin: 1rem 0;
+        gap: 1rem;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-image {
+        width: 140px;
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+      }
+      
+      .section {
+        padding: 4rem 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .card {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .token-row {
+        flex-direction: column;
+        gap: 0.3rem;
+        text-align: center;
+      }
+      
+      .token-label, .token-value {
+        width: 100%;
+      }
+      
+      .icon-links {
+        gap: 1.5rem;
+      }
+      
+      .icon-link {
+        width: 70px;
+      }
+      
+      .icon-container {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="notification" class="notification">Copied to clipboard!</div>
+  
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/grr.gif" alt="GORKRRR Logo">
+      <span><span class="primary"></span> <span class="">$GORKRRR</span></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#how">How It Works</a>
+    </nav>
+    <a href="#buy" class="buy-button">Raydium</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="images/grr.gif" alt="GORKRRR Token" class="hero-image">
+      <h1>Gork Printer</h1>
+      <p class="tagline">The First GORK REWARD 
+        BUY $GORKRRR , HOLD , EARN $GORK</p>
+      <div class="buttons">
+        <a href="#buy" class="btn btn-primary animate__animated animate__pulse animate__infinite">BUY $GORKRRR</a>
+        <a href="https://t.me/GORKRRR_Printer" class="btn btn-outline">Telegram</a>
+      </div>
+      <p class="tagline" style="font-size: 1.3rem; margin-top: 2rem;">
+        <span class="primary">BUY $GORKRRR</span> • <span class="text-light">HOLD</span> • <span class="">EARN $GORK</span>
+      </p>
+    </section>
+    
+    <section id="about" class="section">
+      <h2 class="section-title">About <span class="primary">Gork Printer</span></h2>
+      <p class="tagline">$GORKRRR revolutionary token that rewards you with $GORK just for holding</p>
+      
+      <div class="cards">
+        <div class="card animate__animated animate__fadeInUp">
+          <div class="card-icon">💰</div>
+          <h3 class="card-title">Automatic Rewards</h3>
+          <p class="card-text">Earn $GORK tokens automatically just by holding $GORKRRR in your wallet. No staking, no hassle. The rewards come to you.</p>
+        </div>
+        
+        <div class="card animate__animated animate__fadeInUp animate__delay-1s">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Dual Token Economy</h3>
+          <p class="card-text">Benefit from the powerful synergy between $GORKRRR and $GORK in our innovative dual token ecosystem.</p>
+        </div>
+        
+        <div class="card animate__animated animate__fadeInUp animate__delay-2s">
+          <div class="card-icon">🔄</div>
+          <h3 class="card-title">Reflection Mechanism</h3>
+          <p class="card-text">A percentage of every transaction is distributed to all $GORKRRR holders as $GORK rewards. More volume = more rewards!</p>
+        </div>
+      </div>
+    </section>
+    
+    <section id="how" class="section">
+      <h2 class="section-title">How It <span class="primary">Works</span></h2>
+      <p class="tagline">Simple steps to start earning $GORK rewards</p>
+      
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">1️⃣</div>
+          <h3 class="card-title">Buy $GORKRRR</h3>
+          <p class="card-text">Purchase $GORKRRR tokens through our official links or supported exchanges. Get in early for maximum rewards.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">2️⃣</div>
+          <h3 class="card-title">Hold in Wallet</h3>
+          <p class="card-text">Keep your $GORKRRR tokens in a compatible wallet. That's all you need to do - no complex steps required.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">3️⃣</div>
+          <h3 class="card-title">Earn $GORK</h3>
+          <p class="card-text">Watch your $GORK rewards accumulate automatically in your wallet. The more you hold, the more you earn!</p>
+        </div>
+      </div>
+      
+      <div class="copy-section" id="contractCopy">
+        <h3 style="font-family: 'Orbitron', sans-serif; letter-spacing: 2px; font-size: 1.1rem;">CONTRACT ADDRESS (CLICK TO COPY)</h3>
+        <div class="copy-text" id="contractAddress">---</div>
+      </div>
+    </section>
+    
+    <section id="tokenomics" class="section">
+      <h2 class="section-title"><span class="primary">Tokenomics</span></h2>
+      <p class="tagline">Designed for sustainability and maximum holder rewards</p>
+      
+      <div class="icon-links">
+        <a href="#" class="icon-link" target="_blank">
+          <div class="icon-container">
+            <img src="images/raydium.png" alt="Etherscan" class="icon-image">
+          </div>
+        </a>
+        
+        <a href="#" class="icon-link" target="_blank">
+          <div class="icon-container">
+            <img src="images/dexscreener.png" alt="Dextools" class="icon-image">
+          </div>
+        </a>
+        
+        <a href="#" class="icon-link" target="_blank">
+          <div class="icon-container">
+            <img src="images/dextools.png" alt="Uniswap" class="icon-image">
+          </div>
+        </a>
+        
+        <a href="#" class="icon-link" target="_blank">
+          <div class="icon-container">
+            <img src="images/ntm.png" alt="CoinMarketCap" class="icon-image">
+          </div>
+        </a>
+        
+        <a href="#" class="icon-link" target="_blank">
+          <div class="icon-container">
+            <img src="images/moontox.png" alt="CoinGecko" class="icon-image">
+          </div>
+        </a>
+      </div>
+
+      <style>
+      .icon-image {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.icon-link:hover .icon-image {
+  transform: scale(1.1);
+}
+      </style>
+      
+      <div class="token-card animate__animated animate__fadeIn">
+        <div class="token-row">
+          <span class="token-label">Token Name:</span>
+          <span class="token-value">Gork Printer</span>
+        </div>
+        <div class="token-row">
+          <span class="token-label">Ticker:</span>
+          <span class="token-value">$GORKRRR</span>
+        </div>
+        <div class="token-row">
+          <span class="token-label">Total Supply:</span>
+          <span class="token-value">1,000,000,000 1B GORKRRR</span>
+        </div>
+        <div class="token-row">
+          <span class="token-label">Liquidity:</span>
+          <span class="token-value">Burned</span>
+        </div>
+        <div class="token-row">
+          <span class="token-label">interval
+            :</span>
+          <span class="token-value">15 minute</span>
+        </div>
+         <div class="token-row">
+          <span class="token-label">Min Hold
+            :</span>
+          <span class="token-value">100K</span>
+        </div>
+       
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <div class="social-links">
+      <a href="https://t.me/GORKRRR_Printer" class="social-link">Telegram</a>
+      <a href="https://x.com/GORKRRR_Printer" class="social-link"> Twitter</a>
+      <a href="" class="social-link">Chart</a>
+    </div>
+
+    <p class="footer-tagline">BUY $GORKRRR • HOLD • EARN $GORK</p>
+  </footer>
+  
+  <script>
+    // Copy contract address functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const contractCopy = document.getElementById('contractCopy');
+      const contractAddress = document.getElementById('contractAddress');
+      const notification = document.getElementById('notification');
+      
+      contractCopy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(contractAddress.textContent);
+          
+          // Show notification
+          notification.classList.add('show');
+          
+          // Hide notification after 3 seconds
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 3000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+          // Fallback for browsers that don't support clipboard API
+          const textarea = document.createElement('textarea');
+          textarea.value = contractAddress.textContent;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          
+          // Show notification
+          notification.classList.add('show');
+          
+          // Hide notification after 3 seconds
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 3000);
+        }
+      });
+      
+      // Animate elements when they come into view
+      const animateOnScroll = () => {
+        const cards = document.querySelectorAll('.card');
+        const sections = document.querySelectorAll('.section');
+        
+        cards.forEach(card => {
+          const cardPosition = card.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.3;
+          
+          if (cardPosition < screenPosition) {
+            card.classList.add('animate__fadeInUp');
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', animateOnScroll);
+      animateOnScroll(); // Run once on load
+    });
+  </script>
+
+</body></html>
